@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Razas{% endblock %}
+
+{% block body %}
+    <h1>Create new Razas</h1>
+
+    {{ include('razas/_form.html.twig') }}
+
+    <a href="{{ path('razas_index') }}">back to list</a>
+{% endblock %}

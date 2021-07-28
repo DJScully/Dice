@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}  Razas index  {% endblock %}
+
+{% block body %}
+    <h1>Razas</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Descripcion</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for raza in razas %}
+            <tr>
+                <td>{{ raza.id }}</td>
+                <td>{{ raza.Nombre }}</td>
+                <td>{{ raza.Descripcion }}</td>
+                <td>
+                    <a href="{{ path('razas_show', {'id': raza.id}) }}">show</a>
+                    <a href="{{ path('razas_edit', {'id': raza.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('razas_new') }}">Create new</a>
+{% endblock %}

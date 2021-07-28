@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Razas{% endblock %}
+
+{% block body %}
+    <h1>Razas</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ raza.id }}</td>
+            </tr>
+            <tr>
+                <th>Nombre</th>
+                <td>{{ raza.Nombre }}</td>
+            </tr>
+            <tr>
+                <th>Descripcion</th>
+                <td>{{ raza.Descripcion }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('razas_index') }}">back to list</a>
+
+    <a href="{{ path('razas_edit', {'id': raza.id}) }}">edit</a>
+
+    {{ include('razas/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,15 +1,33 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello UsuarioController!{% endblock %}
+{% block title %} Lista Usuarios {% endblock %}
+{% block body %}  
 
-{% block body %}
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/marka/Desktop/Dice&Dragons/Dicedragons/src/Controller/UsuarioController.php'|file_link(0) }}">src/Controller/UsuarioController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/marka/Desktop/Dice&Dragons/Dicedragons/templates/usuario/index.html.twig'|file_link(0) }}">templates/usuario/index.html.twig</a></code></li>
-    </ul>
-</div>
+<a class="btn btn-primary" href="{{ path('usuario-new') }}">Crear Nuevo Libro</a><br><br>
+        <table class="table table-dark table-bordered table-striped">
+
+      
+            <thead>
+                <th>ID</th>
+                <th>nombre</th>
+                <th>email</th>
+                <th>roles</th>
+            <thead>
+            <tbody>
+                
+                    {% for fondo in fondos %}
+                        <tr>
+                            <td> {{fondo.id}} </td>
+                            <td> {{fondo.nombre}} </td>
+                            <td> {{fondo.email}} </td>
+                            <td> {{fondo.roles[0]}} , {{fondo.roles[1]}}</td>       
+
+                        </tr> 
+                    {% endfor %}
+                  
+            </tbody>
+        </table>
+       
+      
 {% endblock %}

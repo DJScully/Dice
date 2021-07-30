@@ -16,10 +16,14 @@ use Symfony\Config\SecurityConfig;
 class UsuarioController extends AbstractController
 {
     #[Route('/', name: 'usuario')]
-    public function index(): Response
+    public function index(UsuarioRepository $usuarioRepository): Response
     {
+
+        $fondo = $usuarioRepository->findAll();
+
+
         return $this->render('usuario/index.html.twig', [
-            'controller_name' => 'UsuarioController',
+            'fondos' => $fondo
         ]);
     }
     #[Route('/new', name: 'usuario-new')]
@@ -33,7 +37,7 @@ class UsuarioController extends AbstractController
         $nombre= $request->request->get('name');
         $email= $request->request->get('email');
         $password= $request->request->get('password');
-        $rol= $request->request->get('rol');
+        $rol []= $request->request->get('rol');
 
 
         $usuario = new Usuario();
@@ -48,7 +52,7 @@ class UsuarioController extends AbstractController
         $em->persist($usuario);
         $em->flush();
 
-       return $this->render('usuario/new.html.twig', [
+       return $this->render('usuario/index.html.twig', [
             'controller_name' => 'UsuarioController',
         ]);
     }

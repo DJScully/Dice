@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UsuarioRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -30,14 +32,31 @@ class Usuario implements UserInterface, PasswordAuthenticatedUserInterface
     private $Email;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string The hashed password
+     * @ORM\Column(type="string")
      */
-    private $Password;
+    private $password;
+
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="json")
      */
-    private $Roles;
+    private $roles = [];
+
+     /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isVerified = false;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Personaje::class, mappedBy="usuario")
+     */
+    private $personajes;
+
+    public function __construct()
+    {
+        $this->personajes = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -68,45 +87,67 @@ class Usuario implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getPassword(): ?string
+    /**
+     * @see PasswordAuthenticatedUserInterface
+     */
+    public function getPassword(): string
     {
-        return $this->Password;
+        return $this->password;
     }
 
-    public function setPassword(string $Password): self
+    public function setPassword(string $password): self
     {
-        $this->Password = $Password;
+        $this->password = $password;
 
         return $this;
     }
 
-    public function getRoles(): ?string
+   /**
+     * @see UserInterface
+     */
+    public function getRoles(): array
     {
-        return $this->Roles;
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
     }
 
-    public function setRoles(string $Roles): self
+
+    public function setRoles(array $roles): self
     {
-        $this->Roles = $Roles;
+        $this->roles = $roles;
 
         return $this;
     }
 
     public function getUsername()
     {
-        return $this->username;
+        return (string) $this->Email;
     }
 
-    public function getSalt()
+   /**
+     * Returning a salt is only needed, if you are not using a modern
+     * hashing algorithm (e.g. bcrypt or sodium) in your security.yaml.
+     *
+     * @see UserInterface
+     */
+    public function getSalt(): ?string
     {
-        // you *may* need a real salt depending on your encoder
-        // see section on salt below
         return null;
     }
 
+
+     /**
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
+     */
+
     public function getUserIdentifier(): string
     {
-        return (string) $this->email;
+        return (string) $this->Email;
     }
 
     
@@ -127,6 +168,36 @@ class Usuario implements UserInterface, PasswordAuthenticatedUserInterface
     public function setIsVerified(bool $isVerified): self
     {
         $this->isVerified = $isVerified;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Personaje[]
+     */
+    public function getPersonajes(): Collection
+    {
+        return $this->personajes;
+    }
+
+    public function addPersonaje(Personaje $personaje): self
+    {
+        if (!$this->personajes->contains($personaje)) {
+            $this->personajes[] = $personaje;
+            $personaje->setUsuario($this);
+        }
+
+        return $this;
+    }
+
+    public function removePersonaje(Personaje $personaje): self
+    {
+        if ($this->personajes->removeElement($personaje)) {
+            // set the owning side to null (unless already changed)
+            if ($personaje->getUsuario() === $this) {
+                $personaje->setUsuario(null);
+            }
+        }
 
         return $this;
     }

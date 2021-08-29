@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Personaje{% endblock %}
+
+{% block body %}
+    <h1>Personaje</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ personaje.id }}</td>
+            </tr>
+            <tr>
+                <th>Nombre</th>
+                <td>{{ personaje.Nombre }}</td>
+            </tr>
+            <tr>
+                <th>Alienacion</th>
+                <td>{{ personaje.Alienacion }}</td>
+            </tr>
+            <tr>
+                <th>Trasfondo</th>
+                <td>{{ personaje.Trasfondo }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('personaje_index') }}">back to list</a>
+
+    <a href="{{ path('personaje_edit', {'id': personaje.id}) }}">edit</a>
+
+    {{ include('personaje/_delete_form.html.twig') }}
+{% endblock %}

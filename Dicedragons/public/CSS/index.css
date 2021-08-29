@@ -1,10 +1,34 @@
-body{
-    max-width: 100%;
-    margin: 0;
-    font-family: 'Times New Roman', Times, serif !important;
-    background-color: antiquewhite !important;
 
+:root {
+    box-sizing: border-box;
+  }
+  
+  * {
+    box-sizing: inherit;
+    margin: 0px;
+    padding: 0px;
+    outline: none !important;
+  }
+
+  html,body{
+        height: 100%;
+        font-family: 'Times New Roman', Times, serif !important;
+        background-color: antiquewhite !important;
+        
+  }
+
+.fullWidth{
+    max-width: 100%;
+   
 }
+
+.principal{
+    background-image: linear-gradient(to bottom, #f2c942,antiquewhite);
+    margin-bottom: 80px;
+}
+
+
+
 
 form {
     margin: 10px;
@@ -33,5 +57,17 @@ form {
 
 a {
     margin: 10px;
+}
+
+.container{
+    height: auto;
+}
+
+.container1270{
+    width: 1270px;
+}
+
+.title{
+    color: #e84a4a;
 }
 

@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Personaje index{% endblock %}
+
+{% block body %}
+<section class="container container1270">
+    <h1>Personaje index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Alienacion</th>
+                <th>Trasfondo</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for personaje in personajes %}
+            <tr>
+                <td>{{ personaje.id }}</td>
+                <td>{{ personaje.Nombre }}</td>
+                <td>{{ personaje.Alienacion }}</td>
+                <td>{{ personaje.Trasfondo }}</td>
+                <td>
+                    <a href="{{ path('personaje_show', {'id': personaje.id}) }}">show</a>
+                    <a href="{{ path('personaje_edit', {'id': personaje.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('personaje_new') }}">Create new</a>
+    </section>
+{% endblock %}

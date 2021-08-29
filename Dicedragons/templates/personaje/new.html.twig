@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nuevo Personaje{% endblock %}
+
+{% block body %} 
+<header class="principal fullWidth">
+    <div class="container container1270">
+        <h1>Crear Nuevo Personaje</h1>
+    </div>
+</header>
+
+  <section class="container container1270">
+<div>
+   
+    <form method="post" action="{{ path('personaje_anadir') }}">
+        <label for="id_nombre">Nombre</label> 
+        <input type="text" id="id_nombre" name="name"> <br><br>
+        <label for="id_alin">Alienacion</label> 
+        <input type="text" id="id_alin" name="alin"> <br><br>
+        <label for="id_tras">Trasfondo</label> 
+        <input type="text" id="id_tras" name="tras"> <br><br>
+        <label for="id_clase">Clases</label> 
+        <select id="id_clase" name="clase[]" multiple="multiple">
+        {% for clase in clases %}
+            <option value='{{clase.nombre}}'> {{clase.nombre}} </option>
+        {% endfor %}
+        </select><br><br>
+        <label for="id_raza"> Razas </label>
+         <select id="id_raza" name="raza">
+        {% for raza in razas %}
+            <option value='{{raza.nombre}}'> {{raza.nombre}} </option>
+        {% endfor %}
+        </select><br><br>
+        <input type="submit" name="Enviar">
+    </form>
+
+   
+</div>
+
+</section>
+
+{% endblock %}

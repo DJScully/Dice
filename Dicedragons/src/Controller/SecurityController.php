@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\UsuarioRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -15,7 +16,9 @@ class SecurityController extends AbstractController
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
         if ($this->getUser()) {
-             return $this->redirectToRoute('dice');
+            $user = $authenticationUtils->getLastUsername();
+            setcookie("email", $user);
+            return $this->redirectToRoute('dice');
         }
         var_dump($authenticationUtils->getLastUsername());
         // get the login error if there is one
@@ -31,6 +34,7 @@ class SecurityController extends AbstractController
      */
     public function logout()
     {
+        setcookie('.', $_COOKIE["email"], 1);
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
     }
 }

@@ -3,7 +3,11 @@ security:
     enable_authenticator_manager: true
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
-        users_in_memory: { memory: null }
+        #users_in_memory: { memory: null }
+        app_user_provider:
+            entity:
+                class: App\Entity\Usuario
+                property: Email
     password_hashers:
         # use your user class name here
         App\Entity\Usuario:
@@ -16,7 +20,7 @@ security:
             security: false
         main:
             lazy: true
-            provider: users_in_memory
+            provider: app_user_provider
             custom_authenticator: App\Security\UsuarioAuthenticator
             logout:
                 path: app_logout

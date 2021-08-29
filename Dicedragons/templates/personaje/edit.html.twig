@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Personaje{% endblock %}
+
+{% block body %}
+    <h1>Edit Personaje</h1>
+
+    {{ include('personaje/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('personaje_index') }}">back to list</a>
+
+    {{ include('personaje/_delete_form.html.twig') }}
+{% endblock %}

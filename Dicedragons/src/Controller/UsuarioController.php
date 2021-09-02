@@ -52,8 +52,6 @@ class UsuarioController extends AbstractController
         $em->persist($usuario);
         $em->flush();
 
-       return $this->render('usuario/index.html.twig', [
-            'controller_name' => 'UsuarioController',
-        ]);
+       return $this->render('dice/index.html.twig');
     }
 }

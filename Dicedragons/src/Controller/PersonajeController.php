@@ -3,13 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\Personaje;
-use App\Entity\Razas;
 use App\Form\PersonajeType;
 use App\Repository\ClasesRepository;
 use App\Repository\PersonajeRepository;
 use App\Repository\RazasRepository;
 use App\Repository\UsuarioRepository;
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,69 +18,76 @@ use Symfony\Component\Routing\Annotation\Route;
 class PersonajeController extends AbstractController
 {
     #[Route('/', name: 'personaje_index', methods: ['GET'])]
-    public function index(PersonajeRepository $personajeRepository): Response
-    {
+    public function index(UsuarioRepository $usuarioRepository, PersonajeRepository $personajeRepository): Response
+    { 
+        $user = $usuarioRepository->find($this->getUser());
+        //dump($user->getPersonajes());
+        $per = $personajeRepository->findAll();
+        $personas = $user->getPersonajes();
+        $a [] = null;
+        $p = null;
+        for ($i=0; $i < count($personas) ; $i++) { 
+            //echo $personas[$i];
+            $p = $personajeRepository->find($personas[$i]);
+            echo $p;
+            array_push($a, $p->getId());
+          
+        }  $id = ($p->getId());
+            echo $id;
+        $a = $personajeRepository->findBy($a);
+       // dump($user);
+//dump($per);
+        //$per = $personajeRepository->findBy($user);
         return $this->render('personaje/index.html.twig', [
-            'personajes' => $personajeRepository->findAll(),
+            'personajes' =>$a
         ]);
     }
 
-    #[Route('/new', name: 'personaje_new', methods: ['GET', 'POST'])]
+    #[Route('/new', name: 'personaje_new')]
     public function new(ClasesRepository $clasesRepository
     , RazasRepository $razasRepository): Response {
 
         $raza = $razasRepository->findAll();
         $clase = $clasesRepository->findAll();
-       // $_COOKIE["."];
-       /* $personaje = new Personaje();
-        $form = $this->createForm(PersonajeType::class, $personaje);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($personaje);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('personaje_index', [], Response::HTTP_SEE_OTHER);
-        }*/
-
         return $this->renderForm('personaje/new.html.twig', [
             'razas' => $raza,
             'clases' => $clase,
         ]);
     }
-    #[Route('/anadir', name: 'personaje_anadir')]
-    public function anadir(Request $request, Personaje $personaje, UsuarioRepository $usuarioRepository, 
-    ClasesRepository $clasesRepository, RazasRepository $razasRepository, EntityManager $em): Response
+    #[Route('/anadir', name: 'personaje_anadir', methods: ['GET', 'POST'])]
+    public function anadir(Request $request, 
+    ClasesRepository $clasesRepository, RazasRepository $razasRepository, EntityManagerInterface $em): Response
     {
         $nombre= $request->request->get('name');
         $alienacion= $request->request->get('alin');
         $trasfondo= $request->request->get('tras');
-        $clase []= $request->request->get('clase[]');
+
+        $clases= $request->request->get('clase');
+        dump($clases);
         $raza = $request->request->get('raza');
-        $user = $usuarioRepository->findBy($_COOKIE["email"]);
+        $user = $this->getUser();
 
-        $class = $clasesRepository->findBy($clase);
-        $race = $razasRepository->findOneBy($raza);
-
+       
+        $race = $razasRepository->findOneBy( ['Nombre' => $raza] );
+        dump($race);
 
         $personaje = new Personaje();
         $personaje->setNombre($nombre);
         $personaje->setAlienacion($alienacion);
         $personaje->setTrasfondo($trasfondo);
-        for ($i=0; $i < count($clase); $i++) { 
-            $personaje->addClase($class[$i]);
+
+        foreach($clases as $nombreClase){
+            $class = $clasesRepository->findOneBy( ['Nombre' => $nombreClase] );
+            $personaje->addClase($class);
         }
        
-        $personaje->setRaza($race[0]);
-        $personaje->setUsuario($user[0]->getNombre());
+        $personaje->setRaza($race);
+        $personaje->setUsuario($user);
 
         $em->persist($personaje);
         $em->flush();
 
-        return $this->renderForm('personaje/index.html.twig', [
-          
-        ]);
+        return $this->redirectToRoute('personaje_index');
 
     }
 

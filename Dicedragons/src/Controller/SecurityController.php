@@ -20,7 +20,7 @@ class SecurityController extends AbstractController
             setcookie("email", $user);
             return $this->redirectToRoute('dice');
         }
-        var_dump($authenticationUtils->getLastUsername());
+       
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
         // last username entered by the user

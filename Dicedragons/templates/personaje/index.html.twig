@@ -4,7 +4,7 @@
 
 {% block body %}
 <section class="container container1270">
-    <h1>Personaje index</h1>
+    <h1>Personajes</h1>
 
     <table class="table">
         <thead>
@@ -13,6 +13,8 @@
                 <th>Nombre</th>
                 <th>Alienacion</th>
                 <th>Trasfondo</th>
+                <th>Raza</th>
+                <th>Clase</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -23,6 +25,10 @@
                 <td>{{ personaje.Nombre }}</td>
                 <td>{{ personaje.Alienacion }}</td>
                 <td>{{ personaje.Trasfondo }}</td>
+                <td>{{ personaje.raza }}</td> <td>
+                {% for persona in personaje.clase %}
+                   {{ persona }}
+                {% endfor %}</td>
                 <td>
                     <a href="{{ path('personaje_show', {'id': personaje.id}) }}">show</a>
                     <a href="{{ path('personaje_edit', {'id': personaje.id}) }}">edit</a>

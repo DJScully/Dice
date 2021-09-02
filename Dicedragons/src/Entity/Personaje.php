@@ -25,12 +25,7 @@ class Personaje
      */
     private $usuario;
 
-    /**
-     * @ORM\OneToOne(targetEntity=Razas::class, cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $Raza;
-
+ 
     /**
      * @ORM\ManyToMany(targetEntity=Clases::class)
      */
@@ -51,9 +46,21 @@ class Personaje
      */
     private $Trasfondo;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Partida::class, mappedBy="Personajes")
+     */
+    private $partidas;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Razas::class)
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $Raza;
+
     public function __construct()
     {
         $this->Clase = new ArrayCollection();
+        $this->partidas = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -73,17 +80,6 @@ class Personaje
         return $this;
     }
 
-    public function getRaza(): ?Razas
-    {
-        return $this->Raza;
-    }
-
-    public function setRaza(Razas $Raza): self
-    {
-        $this->Raza = $Raza;
-
-        return $this;
-    }
 
     /**
      * @return Collection|Clases[]
@@ -141,6 +137,50 @@ class Personaje
     public function setTrasfondo(string $Trasfondo): self
     {
         $this->Trasfondo = $Trasfondo;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Partida[]
+     */
+    public function getPartidas(): Collection
+    {
+        return $this->partidas;
+    }
+
+    public function addPartida(Partida $partida): self
+    {
+        if (!$this->partidas->contains($partida)) {
+            $this->partidas[] = $partida;
+            $partida->addPersonaje($this);
+        }
+
+        return $this;
+    }
+
+    public function removePartida(Partida $partida): self
+    {
+        if ($this->partidas->removeElement($partida)) {
+            $partida->removePersonaje($this);
+        }
+
+        return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->Nombre;
+    }
+
+    public function getRaza(): ?Razas
+    {
+        return $this->Raza;
+    }
+
+    public function setRaza(?Razas $Raza): self
+    {
+        $this->Raza = $Raza;
 
         return $this;
     }

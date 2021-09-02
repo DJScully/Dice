@@ -53,9 +53,15 @@ class Usuario implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $personajes;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Partida::class, mappedBy="Usuario")
+     */
+    private $partidas;
+
     public function __construct()
     {
         $this->personajes = new ArrayCollection();
+        $this->partidas = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -205,6 +211,36 @@ class Usuario implements UserInterface, PasswordAuthenticatedUserInterface
     public function __toString()
     {
         return $this->Email;
+    }
+
+    /**
+     * @return Collection|Partida[]
+     */
+    public function getPartidas(): Collection
+    {
+        return $this->partidas;
+    }
+
+    public function addPartida(Partida $partida): self
+    {
+        if (!$this->partidas->contains($partida)) {
+            $this->partidas[] = $partida;
+            $partida->setUsuario($this);
+        }
+
+        return $this;
+    }
+
+    public function removePartida(Partida $partida): self
+    {
+        if ($this->partidas->removeElement($partida)) {
+            // set the owning side to null (unless already changed)
+            if ($partida->getUsuario() === $this) {
+                $partida->setUsuario(null);
+            }
+        }
+
+        return $this;
     }
 
 

@@ -4,7 +4,7 @@
 {% block body %}  
 
 
-<a class="btn btn-primary" href="{{ path('usuario-new') }}">Crear Nuevo Libro</a><br><br>
+<a class="btn btn-primary" href="{{ path('usuario-new') }}">Crear Nuevo Usuario</a><br><br>
         <table class="table table-dark table-bordered table-striped">
 
       
@@ -22,7 +22,9 @@
                             <td> {{fondo.nombre}} </td>
                             <td> {{fondo.email}} </td>
                             <td> {{fondo.roles[0]}} , {{fondo.roles[1]}}</td>       
-
+                            {% for fondoss in fondo.partidas %}
+                                <td> {{fondoss.id}} </td>
+                            {% endfor %}
                         </tr> 
                     {% endfor %}
                   

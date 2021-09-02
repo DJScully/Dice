@@ -4,6 +4,25 @@
 
 {% block body %}
 
+ <header class="principal fullWidth">
+                <div class="container container1270">
+                    <div class="logo_meet">
+                        
+                    </div>
+                    <div class="barra">
+                     <img src="{{ asset('img/DbP0Cd8U0AEpB2I.jpg') }}" alt="Meet & Surprizo" class="logo">
+                    <button class="toogle" id="toogle">☰</button>
+                            <ul class="list-group list-group-horizontal-lg">
+                                <li class="list-group-item"> <a href="{{ path('dice') }}"><button class="bot">Principal</button></a></li>
+                                <li class="list-group-item"> <a href="{{ path('razas_index') }}"><button class="bot">Razas</button></a>   </li>
+                                <li class="list-group-item"> <a href="{{ path('clases_index') }}"><button class="bot">Clases</button></a> </li>                        
+                                <li class="list-group-item"> <a href="{{ path('partida_index') }}"><button class="bot">Partidas</button></a></li>
+                                <li class="list-group-item"> <a href="{{ asset('login') }}"><button class="bot">Log in</button></a></li>
+                            </ul>
+                    </div>
+                </div>
+            </header>
+
 <section class="container container1270">
 <div class="example-wrapper">
     <h1 class="title">TE DAMOS LA BIENVENIDA A DICE AND DRAGONS</h1>

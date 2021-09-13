@@ -5,10 +5,10 @@
         <title>{% block title %}Welcome!{% endblock %}</title>
         {# Run `composer require symfony/webpack-encore-bundle`
            and uncomment the following Encore helpers to start using Symfony UX #}
-        
+        <link rel="stylesheet" href="{{ asset('CSS/index.css') }}">
+            <link rel="shortcut icon" href="{{ asset('img/ms-fortune-skullgirls.ico') }}">
         {% block stylesheets %}
-            <link rel="stylesheet" href="{{ asset('CSS/index.css') }}">
-            <link rel="shortcut icon" href="{{ asset('img/ms-fortune-skullgirls.ico') }}">             
+                         
             {#{{ encore_entry_link_tags('app') }}#}
         {% endblock %}
 
@@ -17,6 +17,26 @@
         {% endblock %}
     </head>
     <body>
+     <header class="principal fullWidth">
+                <div class="container container1270">
+                    <div class="logo_meet">
+                        
+                    </div>
+                    <div class="barra">
+                     <img src="{{ asset('img/DbP0Cd8U0AEpB2I.jpg') }}" alt="Meet & Surprizo" class="logo">
+                            <ul class="list-group list-group-horizontal-lg">
+                                <li class="list-group-item"> <a href="{{ path('dice') }}"><button class="bot">Principal</button></a></li>
+                                <li class="list-group-item"> <a href="{{ path('razas_index') }}"><button class="bot">Razas</button></a>   </li>
+                                <li class="list-group-item"> <a href="{{ path('clases_index') }}"><button class="bot">Clases</button></a> </li>  
+                                <li class="list-group-item"> <a href="{{ path('personaje_index') }}"><button class="bot">Tus Personajes</button></a></li>                      
+                                <li class="list-group-item"> <a href="{{ path('partida_propia') }}"><button class="bot">Tus Partidas</button></a></li>
+                                <li class="list-group-item"> <a href="{{ path('partida_index') }}"><button class="bot">Partidas</button></a></li> 
+                                <li class="list-group-item"> <a href="{{ path('app_login') }}"><button class="bot">Log In</button></a></li>
+                                <li class="list-group-item"> <a href="{{ path('app_logout') }}"><button class="bot">Log Out</button></a></li>
+                            </ul>
+                    </div>
+                </div>
+            </header>
         {% block body %}
         {% endblock %}
     </body>

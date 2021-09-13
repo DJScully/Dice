@@ -57,6 +57,36 @@ class Personaje
      */
     private $Raza;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $Fuerza;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $Destreza;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $Constitucion;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $Inteligencia;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $Sabiduria;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $Carisma;
+
     public function __construct()
     {
         $this->Clase = new ArrayCollection();
@@ -181,6 +211,78 @@ class Personaje
     public function setRaza(?Razas $Raza): self
     {
         $this->Raza = $Raza;
+
+        return $this;
+    }
+
+    public function getFuerza(): ?int
+    {
+        return $this->Fuerza;
+    }
+
+    public function setFuerza(int $Fuerza): self
+    {
+        $this->Fuerza = $Fuerza;
+
+        return $this;
+    }
+
+    public function getDestreza(): ?int
+    {
+        return $this->Destreza;
+    }
+
+    public function setDestreza(int $Destreza): self
+    {
+        $this->Destreza = $Destreza;
+
+        return $this;
+    }
+
+    public function getConstitucion(): ?int
+    {
+        return $this->Constitucion;
+    }
+
+    public function setConstitucion(int $Constitucion): self
+    {
+        $this->Constitucion = $Constitucion;
+
+        return $this;
+    }
+
+    public function getInteligencia(): ?int
+    {
+        return $this->Inteligencia;
+    }
+
+    public function setInteligencia(int $Inteligencia): self
+    {
+        $this->Inteligencia = $Inteligencia;
+
+        return $this;
+    }
+
+    public function getSabiduria(): ?int
+    {
+        return $this->Sabiduria;
+    }
+
+    public function setSabiduria(int $Sabiduria): self
+    {
+        $this->Sabiduria = $Sabiduria;
+
+        return $this;
+    }
+
+    public function getCarisma(): ?int
+    {
+        return $this->Carisma;
+    }
+
+    public function setCarisma(int $Carisma): self
+    {
+        $this->Carisma = $Carisma;
 
         return $this;
     }

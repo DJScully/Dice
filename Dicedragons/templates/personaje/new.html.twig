@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Nuevo Personaje{% endblock %}
+{% block title %}Dice & Dragons{% endblock %}
 
 {% block body %} 
 <header class="principal fullWidth">
@@ -15,7 +15,7 @@
     <form method="post" action="{{ path('personaje_anadir') }}">
         <label for="id_nombre">Nombre</label> 
         <input type="text" id="id_nombre" name="name"> <br><br>
-        <label for="id_alin">Alienacion</label> 
+        <label for="id_alin">Alineacion</label> 
         <input type="text" id="id_alin" name="alin"> <br><br>
         <label for="id_tras">Trasfondo</label> 
         <input type="text" id="id_tras" name="tras"> <br><br>
@@ -31,6 +31,21 @@
             <option value='{{raza.nombre}}'> {{raza.nombre}} </option>
         {% endfor %}
         </select><br><br>
+        <h5>Se deben repartir 27 puntos de caracteristicas entre las siguientes habilidades,<br>
+        partiendo del número base 8 puntos, y con un límite de 15 puntos por cada habilidad</h5>
+        <label for="id_fu">Fuerza</label> 
+        <input type="number" placeholder="8" id="id_fu" name="fuerza"> <br><br>
+        <label for="id_des">Destreza</label> 
+        <input type="number" placeholder="8" id="id_des" name="destreza"> <br><br>
+        <label for="id_cons">Constitución</label> 
+        <input type="number" placeholder="8" id="id_cons" name="constitucion"> <br><br>
+        <label for="id_int">Inteligencia</label> 
+        <input type="number" placeholder="8" id="id_int" name="inteligencia"> <br><br>
+        <label for="id_sab">Sabiduría</label> 
+        <input type="number" placeholder="8" id="id_sab" name="sabiduria"> <br><br>
+        <label for="id_car">Carisma</label> 
+        <input type="number" placeholder="8" id="id_car" name="carisma"> <br><br>
+        
         <input type="submit" name="Enviar">
     </form>
 

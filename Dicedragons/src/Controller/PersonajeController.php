@@ -9,6 +9,7 @@ use App\Repository\PersonajeRepository;
 use App\Repository\RazasRepository;
 use App\Repository\UsuarioRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use PhpParser\Node\Expr\Cast\Array_;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,24 +23,15 @@ class PersonajeController extends AbstractController
     { 
         $user = $usuarioRepository->find($this->getUser());
         //dump($user->getPersonajes());
-        $per = $personajeRepository->findAll();
+       
         $personas = $user->getPersonajes();
-        $a [] = null;
-        $p = null;
+       
+        $array = [];
         for ($i=0; $i < count($personas) ; $i++) { 
-            //echo $personas[$i];
-            $p = $personajeRepository->find($personas[$i]);
-            echo $p;
-            array_push($a, $p->getId());
-          
-        }  $id = ($p->getId());
-            echo $id;
-        $a = $personajeRepository->findBy($a);
-       // dump($user);
-//dump($per);
-        //$per = $personajeRepository->findBy($user);
+            $array[$i] = $personas[$i];
+        }
         return $this->render('personaje/index.html.twig', [
-            'personajes' =>$a
+            'personajes' =>$array
         ]);
     }
 
@@ -54,13 +46,54 @@ class PersonajeController extends AbstractController
             'clases' => $clase,
         ]);
     }
+    
     #[Route('/anadir', name: 'personaje_anadir', methods: ['GET', 'POST'])]
     public function anadir(Request $request, 
     ClasesRepository $clasesRepository, RazasRepository $razasRepository, EntityManagerInterface $em): Response
     {
+
         $nombre= $request->request->get('name');
         $alienacion= $request->request->get('alin');
         $trasfondo= $request->request->get('tras');
+
+        $fuerza= $request->request->get('fuerza');
+        $destreza= $request->request->get('destreza');
+        $constitucion= $request->request->get('constitucion');
+        $inteligencia= $request->request->get('inteligencia');
+        $sabiduria= $request->request->get('sabiduria');
+        $carisma= $request->request->get('carisma');
+
+        $total = $fuerza+$destreza+$constitucion+$inteligencia+$sabiduria+$carisma;
+        $var = [];
+        $array = [$fuerza,$destreza,$constitucion,$inteligencia,$sabiduria,$carisma];
+        if ($total == (48+27)) {
+           
+            for ($i=0; $i < count($array); $i++) { 
+
+                if ($array[$i] < 28 && $array[$i] > 7) {
+                    if($array[$i]>=8 && $array[$i]<10){
+                        $var[$i]=-1;
+                    } elseif($array[$i]>=10 && $array[$i]<12){
+                        $var[$i]=0;
+                    } elseif($array[$i]>=12 && $array[$i]<14){
+                        $var[$i]=1;
+                    } elseif($array[$i]>=14 && $array[$i]<16){
+                        $var[$i]=2;
+                    } elseif($array[$i]>=16 && $array[$i]<18){
+                        $var[$i]=3;
+                    }
+                } else {
+                    return $this->redirectToRoute('personaje_new');
+                }
+
+                
+            }
+        } else {
+            return $this->redirectToRoute('personaje_new');
+        }
+
+
+        dump($array);
 
         $clases= $request->request->get('clase');
         dump($clases);
@@ -75,6 +108,13 @@ class PersonajeController extends AbstractController
         $personaje->setNombre($nombre);
         $personaje->setAlienacion($alienacion);
         $personaje->setTrasfondo($trasfondo);
+        $personaje->setFuerza($var[0]);
+        $personaje->setDestreza($var[1]);
+        $personaje->setConstitucion($var[2]);
+        $personaje->setInteligencia($var[3]);
+        $personaje->setSabiduria($var[4]);
+        $personaje->setCarisma($var[5]);
+
 
         foreach($clases as $nombreClase){
             $class = $clasesRepository->findOneBy( ['Nombre' => $nombreClase] );

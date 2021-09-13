@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Personaje index{% endblock %}
+{% block title %}Dice & Dragons{% endblock %}
 
 {% block body %}
 <section class="container container1270">
@@ -14,7 +14,13 @@
                 <th>Alienacion</th>
                 <th>Trasfondo</th>
                 <th>Raza</th>
-                <th>Clase</th>
+                <th>Clase</th>               
+                <th>Fuerza</th>
+                <th>Destreza</th>
+                <th>Constitución</th>
+                <th>Inteligencia</th>
+                <th>Sabiduría</th>
+                <th>Carisma</th> 
                 <th>actions</th>
             </tr>
         </thead>
@@ -29,6 +35,12 @@
                 {% for persona in personaje.clase %}
                    {{ persona }}
                 {% endfor %}</td>
+                <td>{{ personaje.Fuerza }}</td>
+                <td>{{ personaje.Destreza }}</td>
+                <td>{{ personaje.Constitucion }}</td> 
+                <td>{{ personaje.Inteligencia }}</td>
+                <td>{{ personaje.Sabiduria }}</td>
+                <td>{{ personaje.Carisma }}</td>
                 <td>
                     <a href="{{ path('personaje_show', {'id': personaje.id}) }}">show</a>
                     <a href="{{ path('personaje_edit', {'id': personaje.id}) }}">edit</a>

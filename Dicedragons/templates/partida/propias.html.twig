@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Dice & Dragons{% endblock %}
+
+{% block body %}
+    <h1>Partida index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Proxima_sesion</th>
+                <th>DM</th>
+                <th>Personajes</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for partida in partidas %}
+            <tr>
+                <td>{{ partida.id }}</td>
+                <td>{{ partida.ProximaSesion ? partida.ProximaSesion|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ partida.usuario.id }}</td> <td>
+                {% for personajes in partida.personajes %}
+                   {{ personajes.nombre }} ({{ personajes.id }}). 
+                {% endfor %}</td>
+                <td>
+                   
+                    <a href="{{ path('partida_anadir', {'id': partida.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('partida_new') }}">Create new</a>
+{% endblock %}

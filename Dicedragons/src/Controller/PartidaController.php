@@ -5,8 +5,11 @@ namespace App\Controller;
 use App\Entity\Partida;
 use App\Entity\Personaje;
 use App\Form\PartidaType;
+use Doctrine\ORM\EntityManagerInterface;
+
 use App\Repository\PartidaRepository;
 use App\Repository\PersonajeRepository;
+use App\Repository\UsuarioRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,6 +27,20 @@ class PartidaController extends AbstractController
         ]);
     }
 
+    #[Route('/partidas_propias', name: 'partida_propia', methods: ['GET'])]
+    public function propias(UsuarioRepository $usuarioRepository,PartidaRepository $partidaRepository): Response{
+        $user = $usuarioRepository->find($this->getUser());
+        $partidas = $user->getPartidas(); $array = [];
+        for ($i=0; $i < count($partidas) ; $i++) { 
+            $array[$i] = $partidas[$i];
+        }
+        //$p = $personajeRepository->findAll();
+        return $this->render('partida/propias.html.twig', [
+            'partidas' => $array,
+            
+        ]);
+    }
+    
     #[Route('/new', name: 'partida_new', methods: ['GET', 'POST'])]
     public function new(Request $request): Response
     {
@@ -68,6 +85,53 @@ class PartidaController extends AbstractController
         return $this->renderForm('partida/edit.html.twig', [
             'partida' => $partida,
             'form' => $form,
+        ]);
+    }
+
+    #[Route('/{id}/anadir', name: 'partida_anadir', methods: ['GET', 'POST'])]
+    public function anadir(UsuarioRepository $usuarioRepository, Partida $partida, PartidaRepository $partidaRepository,$id): Response
+    {
+
+        $user = $usuarioRepository->find($this->getUser());
+
+        $party = $partidaRepository->find($id);
+
+        
+
+        dump($party);
+        $array = $user->getPersonajes();
+
+        return $this->render('partida/anadir.html.twig', [
+            'partidas' => $array, 'partys' => $party,
+           
+        ]);
+    }
+
+    #[Route('/person', name: 'partida_person', methods: ['GET', 'POST'])]
+    public function person(Request $request,EntityManagerInterface $em,PersonajeRepository $personajeRepository, 
+    UsuarioRepository $usuarioRepository, PartidaRepository $partidaRepository): Response
+    {        
+        $id = $request->request->get('id');
+
+
+        $partida = $partidaRepository->find($id);
+
+        $nombre = $request->request->get('personaje');
+
+
+
+        $per = $personajeRepository->findOneBy(['Nombre' => $nombre]);
+        
+        $partida->addPersonaje($per);
+
+        $em->persist($partida);
+
+        $em->flush();
+
+
+        return $this->renderForm('partida/index.html.twig', [
+            'partidas' => $partidaRepository->findAll()
+           
         ]);
     }
 

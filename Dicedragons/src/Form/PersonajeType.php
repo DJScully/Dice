@@ -20,6 +20,12 @@ class PersonajeType extends AbstractType
             ->add('usuario')
             ->add('Raza')
             ->add('Clase')
+            ->add('Fuerza')
+            ->add('Destreza')
+            ->add('Constitucion')
+            ->add('Inteligencia')
+            ->add('Sabiduria')
+            ->add('Carisma')
         ;
     }
 

@@ -13,6 +13,7 @@
                 <th>nombre</th>
                 <th>email</th>
                 <th>roles</th>
+                <th>Partidas</th>
             <thead>
             <tbody>
                 
@@ -22,9 +23,9 @@
                             <td> {{fondo.nombre}} </td>
                             <td> {{fondo.email}} </td>
                             <td> {{fondo.roles[0]}} , {{fondo.roles[1]}}</td>       
-                            {% for fondoss in fondo.partidas %}
-                                <td> {{fondoss.id}} </td>
-                            {% endfor %}
+                            <td>{% for fondoss in fondo.partidas %}
+                                 {{fondoss.id}}.
+                            {% endfor %}</td>
                         </tr> 
                     {% endfor %}
                   

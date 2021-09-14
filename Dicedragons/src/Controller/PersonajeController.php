@@ -19,9 +19,9 @@ use Symfony\Component\Routing\Annotation\Route;
 class PersonajeController extends AbstractController
 {
     #[Route('/', name: 'personaje_index', methods: ['GET'])]
-    public function index(UsuarioRepository $usuarioRepository, PersonajeRepository $personajeRepository): Response
+    public function index(): Response
     { 
-        $user = $usuarioRepository->find($this->getUser());
+        $user =$this->getUser();
         //dump($user->getPersonajes());
        
         $personas = $user->getPersonajes();

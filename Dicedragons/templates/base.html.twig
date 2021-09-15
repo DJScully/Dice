@@ -3,21 +3,12 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
         {# Run `composer require symfony/webpack-encore-bundle`
            and uncomment the following Encore helpers to start using Symfony UX #}
         <link rel="stylesheet" href="{{ asset('CSS/index.css') }}">
             <link rel="shortcut icon" href="{{ asset('img/ms-fortune-skullgirls.ico') }}">
-        {% block stylesheets %}
-                         
-            {#{{ encore_entry_link_tags('app') }}#}
-        {% endblock %}
-
-        {% block javascripts %}
-            {#{{ encore_entry_script_tags('app') }}#}
-        {% endblock %}
-    </head>
-    <body>
-     <header class="principal fullWidth">
+             <header class="principal fullWidth">
                 <div class="container container1270">
                     <div class="logo_meet">
                         
@@ -37,7 +28,18 @@
                     </div>
                 </div>
             </header>
+        {% block stylesheets %}
+                         
+            {#{{ encore_entry_link_tags('app') }}#}
+        {% endblock %}
+
+        {% block javascripts %}
+            {#{{ encore_entry_script_tags('app') }}#}
+        {% endblock %}
+    </head>
+    <body>
         {% block body %}
+           
         {% endblock %}
     </body>
 </html>

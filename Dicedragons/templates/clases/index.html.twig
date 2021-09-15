@@ -12,7 +12,6 @@
                 <th>Id</th>
                 <th>Nombre</th>
                 <th>Descripcion</th>
-                <th>actions</th>
             </tr>
         </thead>
         <tbody>
@@ -21,10 +20,6 @@
                 <td>{{ clase.id }}</td>
                 <td>{{ clase.Nombre }}</td>
                 <td>{{ clase.Descripcion }}</td>
-                <td>
-                    <a href="{{ path('clases_show', {'id': clase.id}) }}">show</a>
-                    <a href="{{ path('clases_edit', {'id': clase.id}) }}">edit</a>
-                </td>
             </tr>
         {% else %}
             <tr>

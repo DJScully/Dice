@@ -1,6 +1,13 @@
 {% extends 'base.html.twig' %}
-
 {% block title %}Dice & Dragons{% endblock %}
+
+{% block javascripts %}
+<link  rel="stylesheet"
+  href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+<script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
+
+{% endblock %}
 
 {% block body %}
 
@@ -9,14 +16,23 @@
 
 
 <section class="fullWidth container container1270">
-<div class="example-wrapper">
-    <h1 class="title">TE DAMOS LA BIENVENIDA A DICE AND DRAGONS</h1>
 
-    
-<h3>Dungeon20 es una herramienta web gratuita que te permite crear, gestionar
- y compartir tus personajes y campañas para tus partidas de Dungeons & Dragons,
-  El Resurgir del Dragón y otros juegos de rol con el sistema D20.</h3>
-   
-</div>
+    <div class="swiper-slide"> 
+      
+    	<img src= "{{ asset('img/c9yJAEn8GDeHWqD-hero-bg.jpg') }}" alt="logo" class="NTT">
+      
+    </div>
+    <div class="swiper-slide"> 
+		<img src="{{ asset('img/Multiclase-Dnd-5e.png') }}" alt="logo" class="NTT">
+	</div>
+    <div class="swiper-slide"> 
+		<img src="{{ asset('img/resurgir-landing-004f.jpg') }}" alt="logo" class="NTT">
+		
+	</div>
+ 
+
 </section>
+
+<script src="{{ asset('JS/carousel.js') }}">
+</script>
 {% endblock %}

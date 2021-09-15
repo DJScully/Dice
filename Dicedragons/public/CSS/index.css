@@ -63,7 +63,24 @@
     width: 20%;
 }
 
+.swiper-container {
+    width: 600px;
+    height: 300px;
+   
+}
 
+.swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    display: flex;
+    justify-content: space-around;
+    
+  }
+
+  .NTT{
+      height: 400px !important;
+      
+  }
 
 form {
     margin: 10px;

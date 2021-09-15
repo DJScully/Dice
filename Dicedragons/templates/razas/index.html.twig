@@ -12,7 +12,6 @@
                 <th>Id</th>
                 <th>Nombre</th>
                 <th>Descripcion</th>
-                <th>actions</th>
             </tr>
         </thead>
         <tbody>
@@ -21,10 +20,6 @@
                 <td>{{ raza.id }}</td>
                 <td>{{ raza.Nombre }}</td>
                 <td>{{ raza.Descripcion }}</td>
-                <td>
-                    <a href="{{ path('razas_show', {'id': raza.id}) }}">show</a>
-                    <a href="{{ path('razas_edit', {'id': raza.id}) }}">edit</a>
-                </td>
             </tr>
         {% else %}
             <tr>

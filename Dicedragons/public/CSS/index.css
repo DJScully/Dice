@@ -27,6 +27,10 @@
     margin-bottom: 80px;
 }
 
+.list-group{
+    display: flex;
+}
+
 .list-group-item{
     border: none;
     background-color: transparent;
@@ -63,23 +67,41 @@
     width: 20%;
 }
 
-.swiper-container {
-    width: 600px;
-    height: 300px;
-   
+.logo_meet{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.swip {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    align-content: space-around;
 }
 
 .swiper-slide {
-    text-align: center;
-    font-size: 18px;
+  
+    align-items: center;
+    align-content: center;
+    flex-wrap: wrap;
+    flex-direction: row;
     display: flex;
-    justify-content: space-around;
-    
   }
 
+.text{
+    font-size: 5.0em;text-align: center;
+}
+
+.info {
+    background-image: linear-gradient(to bottom, #f2c942,#faebd7);
+}
+
   .NTT{
-      height: 400px !important;
-      
+    padding-top: 100px;
+    background-image: linear-gradient(to top, #f2c942,#faebd7);
+      width: 100%;
   }
 
 form {
@@ -121,5 +143,38 @@ a {
 
 .title{
     color: #e84a4a;
+    font-size: 5em;
+}
+.foot{
+    background-image: linear-gradient(to top, #f2c942,#faebd7);
+    margin: 0;
 }
 
+.final{
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 0;
+    flex-wrap: wrap;
+   
+    padding-top: 20px;
+}
+
+.listas{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+}
+
+.f-list{
+    display: flex;
+    justify-content: space-around;
+    font-size: 1.5em;
+    text-align: center;
+    text-decoration: none;
+    list-style-type: none;
+}
+
+.final-list{
+    padding-right: 50px;
+}

@@ -11,10 +11,11 @@
              <header class="principal fullWidth">
                 <div class="container container1270">
                     <div class="logo_meet">
-                        
+                         <img src="{{ asset('img/DbP0Cd8U0AEpB2I.jpg') }}" alt="Meet & Surprizo" class="logo">
+                         <h1 class="title">DICE AND DRAGONS</h1>
                     </div>
                     <div class="barra">
-                     <img src="{{ asset('img/DbP0Cd8U0AEpB2I.jpg') }}" alt="Meet & Surprizo" class="logo">
+                    
                             <ul class="list-group list-group-horizontal-lg">
                                 <li class="list-group-item"> <a href="{{ path('dice') }}"><button class="bot">Principal</button></a></li>
                                 <li class="list-group-item"> <a href="{{ path('razas_index') }}"><button class="bot">Razas</button></a>   </li>
@@ -41,5 +42,24 @@
         {% block body %}
            
         {% endblock %}
+        <footer class="fullWidth foot">
+        <div class=" final container container1270">
+            <div>
+                <img src="{{ asset('img/descarga(1).jpg') }}" alt="NTT">
+            </div>
+            <div class="listas">
+                
+                <ul  class="f-list"> 
+                    <li class="final-list">Overwiew</li>
+                    <li class="final-list">NTT Accelerates</li>
+                    <li class="final-list">SMART</li>
+                </ul>
+              
+            </div>
+        </div>
+        <div class=" bio container container1270">
+            <h3>© 2020 DnD, Inc. All Rights Reserved</h3>
+        </div>
+    </footer>
     </body>
 </html>

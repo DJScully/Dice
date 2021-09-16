@@ -21,6 +21,8 @@ security:
         main:
             lazy: true
             provider: app_user_provider
+            entry_point: App\Security\AuthenticationEntryPoint
+            access_denied_handler: App\Security\AccessDeniedHandler
             custom_authenticator: App\Security\UsuarioAuthenticator
             logout:
                 path: app_logout

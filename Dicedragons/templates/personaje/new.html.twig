@@ -3,24 +3,24 @@
 {% block title %}Dice & Dragons{% endblock %}
 
 {% block body %} 
-<header class="principal fullWidth">
+
     <div class="container container1270">
         <h1>Crear Nuevo Personaje</h1>
     </div>
-</header>
+
 
   <section class="container container1270">
 <div>
    
     <form method="post" action="{{ path('personaje_anadir') }}">
         <label for="id_nombre">Nombre</label> 
-        <input type="text" id="id_nombre" name="name"> <br><br>
+        <input type="text" id="id_nombre" name="name" required> <br><br>
         <label for="id_alin">Alineacion</label> 
-        <input type="text" id="id_alin" name="alin"> <br><br>
+        <input type="text" id="id_alin" name="alin" required> <br><br>
         <label for="id_tras">Trasfondo</label> 
-        <input type="text" id="id_tras" name="tras"> <br><br>
+        <input type="text" id="id_tras" name="tras" required> <br><br>
         <label for="id_clase">Clases</label> 
-        <select id="id_clase" name="clase[]" multiple="multiple">
+        <select id="id_clase" name="clase[]" multiple="multiple" required>
         {% for clase in clases %}
             <option value='{{clase.nombre}}'> {{clase.nombre}} </option>
         {% endfor %}
@@ -32,19 +32,19 @@
         {% endfor %}
         </select><br><br>
         <h5>Se deben repartir 27 puntos de caracteristicas entre las siguientes habilidades,<br>
-        partiendo del número base 8 puntos, y con un límite de 15 puntos por cada habilidad</h5>
+        partiendo del número base 8 puntos, y con un límite de 17 puntos por cada habilidad.<br><br>
         <label for="id_fu">Fuerza</label> 
-        <input type="number" placeholder="8" id="id_fu" name="fuerza"> <br><br>
+        <input  type="number" min="8" max="17" placeholder="8" id="id_fu" value="8" name="fuerza"> <br><br>
         <label for="id_des">Destreza</label> 
-        <input type="number" placeholder="8" id="id_des" name="destreza"> <br><br>
+        <input  type="number" min="8" max="17" placeholder="8" id="id_des" value="8" name="destreza"> <br><br>
         <label for="id_cons">Constitución</label> 
-        <input type="number" placeholder="8" id="id_cons" name="constitucion"> <br><br>
+        <input  type="number" min="8" max="17" placeholder="8" id="id_cons" value="8" name="constitucion"> <br><br>
         <label for="id_int">Inteligencia</label> 
-        <input type="number" placeholder="8" id="id_int" name="inteligencia"> <br><br>
+        <input  type="number" min="8" max="17" placeholder="8" id="id_int" value="8" name="inteligencia"> <br><br>
         <label for="id_sab">Sabiduría</label> 
-        <input type="number" placeholder="8" id="id_sab" name="sabiduria"> <br><br>
-        <label for="id_car">Carisma</label> 
-        <input type="number" placeholder="8" id="id_car" name="carisma"> <br><br>
+        <input  type="number" min="8" max="17" placeholder="8" id="id_sab" value="8" name="sabiduria"> <br><br>
+        <label for="id_car">Carisma</label>  
+        <input  type="number" min="8" max="17" placeholder="8" id="id_car" value="8" name="carisma"> <br><br>
         
         <input type="submit" name="Enviar">
     </form>

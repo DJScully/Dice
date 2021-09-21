@@ -44,22 +44,24 @@
         {% endblock %}
         <footer class="fullWidth foot">
         <div class=" final container container1270">
-            <div>
-                <img src="{{ asset('img/descarga(1).jpg') }}" alt="NTT">
+            <div class="link">
+               
+            <h3>© 2020 DnD, Inc. All Rights Reserved</h3>
+     
             </div>
             <div class="listas">
                 
                 <ul  class="f-list"> 
-                    <li class="final-list">Overwiew</li>
-                    <li class="final-list">NTT Accelerates</li>
-                    <li class="final-list">SMART</li>
+                    <a href="https://app.roll20.net/sessions/new" class="link" target="_blank">
+                    <img class="img_foot" src={{ asset('img/Roll20-OG.png') }} >
+                    <li class="final-list">Roll20</li></a>
+                    <a href="https://twitter.com/roll20app" target="_blank" class="link"><img class="img_foot" src={{ asset('img/371907030_TWITTER_ICON_1080.png') }} ><li class="final-list">Twitter</li></a>
+                    <a href="https://www.youtube.com/channel/UCHC1kWACzA7G6D2fqkqsRDg" class="link" target="_blank"><img id="youtube" class="img_foot" src={{ asset('img/YouTube_dark_icon).svg.png') }} ><li class="final-list">Youtube</li></a>
                 </ul>
               
             </div>
         </div>
-        <div class=" bio container container1270">
-            <h3>© 2020 DnD, Inc. All Rights Reserved</h3>
-        </div>
+       
     </footer>
     </body>
 </html>

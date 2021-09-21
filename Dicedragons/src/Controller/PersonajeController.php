@@ -66,25 +66,27 @@ class PersonajeController extends AbstractController
         $total = $fuerza+$destreza+$constitucion+$inteligencia+$sabiduria+$carisma;
         $var = [];
         $array = [$fuerza,$destreza,$constitucion,$inteligencia,$sabiduria,$carisma];
-        if ($total == (48+27)) {
+        if ($total > 48) {
            
             for ($i=0; $i < count($array); $i++) { 
 
                 if ($array[$i] < 28 && $array[$i] > 7) {
-                    if($array[$i]>=8 && $array[$i]<10){
+                    $tot = ($array[$i]-8);
+                    if( $tot >=0 &&  $tot <2){
                         $var[$i]=-1;
-                    } elseif($array[$i]>=10 && $array[$i]<12){
+                    } elseif( $tot >=2 && $tot <4){
                         $var[$i]=0;
-                    } elseif($array[$i]>=12 && $array[$i]<14){
+                    } elseif( $tot >=4 && $tot <6){
                         $var[$i]=1;
-                    } elseif($array[$i]>=14 && $array[$i]<16){
+                    } elseif( $tot >=6 && $tot <9){
                         $var[$i]=2;
-                    } elseif($array[$i]>=16 && $array[$i]<18){
+                    } elseif( $tot == 9){
                         $var[$i]=3;
-                    }
+                    } 
                 } else {
                     return $this->redirectToRoute('personaje_new');
                 }
+
 
                 
             }

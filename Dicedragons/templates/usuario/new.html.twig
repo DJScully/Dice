@@ -8,11 +8,11 @@
     <h1>Nuevo Usuario</h1>
     <form method="post" action="{{ path('usuario-insert') }}">
         <label for="id_nombre">Nombre</label> 
-        <input type="text" id="id_nombre" name="name"> <br><br>
+        <input type="text" id="id_nombre" name="name" required> <br><br>
         <label for="id_email">Email</label> 
-        <input type="text" id="id_email" name="email"> <br><br>
+        <input type="text" id="id_email" name="email" required> <br><br>
         <label for="id_pass">Contraseña</label> 
-        <input type="password" id="id_pass" name="password"> <br><br>
+        <input type="password" id="id_pass" name="password" required> <br><br>
         <label for="id_rol">Tipo</label> 
         <select name="rol">
             <option value='ROLE_ADMIN'> Dungeon Master </option>

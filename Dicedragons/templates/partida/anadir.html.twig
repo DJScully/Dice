@@ -3,12 +3,12 @@
 {% block title %}Dice & Dragons{% endblock %}
 
 {% block body %} 
-<header class="principal fullWidth">
+
     <div class="container container1270">
         <h1>Crear Nuevo Personaje</h1>
        
     </div>
-</header>
+<br><br><br>
 
   <section class="container container1270">
 <div>
@@ -29,10 +29,10 @@
 
             
         </select><br><br>
-       <input type="number" name="id" value="{{partys.id}}"><br><br>
+       <input type="number" name="id" value="{{partys.id}}" min="{{partys.id}}" max ="{{partys.id}}"><br><br>
         <input type="submit" name="Enviar" class="bot">
     </form>
-                <p> hola </p>
+               
 
         
     </div>
